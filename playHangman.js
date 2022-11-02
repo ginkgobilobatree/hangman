@@ -7,9 +7,11 @@ const rl = readline.createInterface({
 const word = require("./store/wordsStore");
 const hangman = require("./store/hangmanConstruction");
 const fillHiddenWord = require("./utils/fillHiddenWord");
+const winLoseTimer = require("./utils/winLoseTimer");
 const winTimer = require("./utils/winTimer");
 const loseTimer = require("./utils/loseTimer");
-const runningMan = require("./store/runningMan")
+const runningMan = require("./store/runningManConstruction");
+const text = require("./store/text");
 const log = console.log;
 
 (() => {
@@ -19,7 +21,7 @@ const log = console.log;
 
     let recursiveQuestion = () => {
         if (tries === 10) {
-            loseTimer(word);
+            winLoseTimer(text.loseText(word), text.loseTextTime);
             runningMan();
             return rl.close();
         }
@@ -30,7 +32,7 @@ const log = console.log;
 
             if (answer.toLowerCase() === word.toLowerCase()) {
                 console.clear();
-                winTimer(word);
+                winLoseTimer(text.winText(word), text.winTextTime);
                 return rl.close();
             }
 
@@ -45,7 +47,7 @@ const log = console.log;
                 finalHiddenWord = fillHiddenWord(finalHiddenWord, word, answer);
                 if (finalHiddenWord.toLowerCase() === word.toLowerCase()) {
                     log(`\n     ${word}`);
-                    winTimer(word);
+                    winLoseTimer(text.winText(word), text.winTextTime);
                     return rl.close();
                 }
                 log(`\n     ${finalHiddenWord}`)
