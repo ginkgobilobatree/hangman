@@ -1,3 +1,5 @@
+const {tornRope} = require("./text");
+
 function runTime() {
     setTimeout(() => {
         let runningMan = [
@@ -28,7 +30,7 @@ function runTime() {
         let i = 0;
         const moving = setInterval(() => {
             console.clear();
-            console.log(`\n\n     Oh, der Strick ist gerissen! Somit wird niemand gehängt!!!`)
+            console.log(tornRope)
             console.log(runningMan[i]);
             i++;
             if (i === runningMan.length) clearInterval(moving);

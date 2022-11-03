@@ -10,6 +10,7 @@ const fillHiddenWord = require("./utils/fillHiddenWord");
 const winLoseTimer = require("./utils/winLoseTimer");
 const runningMan = require("./store/runningManConstruction");
 const text = require("./store/text");
+const intervals = require("./store/intervals");
 const log = console.log;
 
 (() => {
@@ -19,18 +20,18 @@ const log = console.log;
 
     let recursiveQuestion = () => {
         if (tries === 10) {
-            winLoseTimer(text.loseText(word), text.loseTextTime);
+            winLoseTimer(text.loseText(word), intervals.loseTextTime);
             runningMan();
             return rl.close();
         }
-        rl.question(tries || answers.length ? '\n     Versuche einen anderen Buchstaben! ' : '\n     Willkommen bei Galgenbaum! Errate das Wort, indem du mit einem Buchstaben deiner Wahl beginnst. ', (answer) => {
+        rl.question(tries || answers.length ? text.tryAnotherLetter : text.welcome, (answer) => {
             log(`\n     ${finalHiddenWord}`)
             console.clear();
             // guessed whole word correctly
 
             if (answer.toLowerCase() === word.toLowerCase()) {
                 console.clear();
-                winLoseTimer(text.winText(word), text.winTextTime);
+                winLoseTimer(text.winText(word), intervals.winTextTime);
                 return rl.close();
             }
 
@@ -38,24 +39,24 @@ const log = console.log;
 
             else if (word.toLowerCase().includes(answer.toLowerCase()) && answer.length > 0 && answer.toLowerCase() !== answer.toUpperCase()) {
                 answers.includes(answer) ? null : answers.push(answer);
-                log(`\n     Sehr gut, '${answer}' steckt im Wort.\n`);
+                log(text.veryGood(answer));
                 if (tries > 0) { // builds hangman
-                    log(...Object.values(hangman[tries - 1]));
+                    log(hangman[tries - 1]);
                 }
                 finalHiddenWord = fillHiddenWord(finalHiddenWord, word, answer);
                 if (finalHiddenWord.toLowerCase() === word.toLowerCase()) {
                     log(`\n     ${word}`);
-                    winLoseTimer(text.winText(word), text.winTextTime);
+                    winLoseTimer(text.winText(word), intervals.winTextTime);
                     return rl.close();
                 }
                 log(`\n     ${finalHiddenWord}`)
-                log("\n     Du hast folgene Buchstaben probiert:", ...answers);
+                log(text.youTried, ...answers);
                 recursiveQuestion();
             }
 
             else if (answer.length > 1 || answer.toLowerCase() === answer.toUpperCase()) {
                 console.clear();
-                log('     Bitte nur Buchstaben und zwar einzeln.');
+                log(text.onlySingleLetters);
                 answer.length ? answers.push(answer) : null;
                 recursiveQuestion();
             }
@@ -64,10 +65,10 @@ const log = console.log;
 
             else {
                 answer.length > 0 ? answers.push(answer) : null;
-                log(`\n     Tja, leider steckt '${answer}' nicht im Wort.\n`);
-                log(...Object.values(hangman[tries])); // builds hangman
+                log(text.wrongGuess(answer));
+                log(hangman[tries]); // builds hangman
                 log(`\n     ${finalHiddenWord}`)
-                log("\n     Du hast folgene Buchstaben probiert:", ...answers);
+                log(text.youTried, ...answers);
                 tries += 1;
                 recursiveQuestion();
             }
