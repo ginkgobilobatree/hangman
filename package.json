@@ -1,0 +1,25 @@
+{
+  "name": "hangman",
+  "version": "1.0.0",
+  "description": "a game for the console",
+  "main": "playHangman.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ginkgobilobatree/hangman.git"
+  },
+  "keywords": [
+    "node",
+    "javascript",
+    "hangman",
+    "galgenbaum"
+  ],
+  "author": "Gino Massalski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ginkgobilobatree/hangman/issues"
+  },
+  "homepage": "https://github.com/ginkgobilobatree/hangman#readme"
+}
