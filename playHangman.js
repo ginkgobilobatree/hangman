@@ -20,7 +20,7 @@ const log = console.log;
 
     let recursiveQuestion = () => {
         if (tries === 10) {
-            winLoseTimer(text.loseText(word), intervals.loseTextTime);
+            winLoseTimer(text.loseText(word), intervals.loseTextInterval);
             runningMan();
             return rl.close();
         }
@@ -31,7 +31,7 @@ const log = console.log;
 
             if (answer.toLowerCase() === word.toLowerCase()) {
                 console.clear();
-                winLoseTimer(text.winText(word), intervals.winTextTime);
+                winLoseTimer(text.winText(word), intervals.winTextInterval);
                 return rl.close();
             }
 
@@ -46,7 +46,7 @@ const log = console.log;
                 finalHiddenWord = fillHiddenWord(finalHiddenWord, word, answer);
                 if (finalHiddenWord.toLowerCase() === word.toLowerCase()) {
                     log(`\n     ${word}`);
-                    winLoseTimer(text.winText(word), intervals.winTextTime);
+                    winLoseTimer(text.winText(word), intervals.winTextInterval);
                     return rl.close();
                 }
                 log(`\n     ${finalHiddenWord}`)

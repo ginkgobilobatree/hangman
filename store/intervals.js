@@ -1,6 +1,6 @@
 const intervals = {
-    winTextTime: 1000,
-    loseTextTime: 1500 
+    winTextInterval: 1000,
+    loseTextInterval: 1500 
 }
 
 module.exports = intervals;
