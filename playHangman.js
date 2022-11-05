@@ -14,7 +14,7 @@ const text = require('./store/text');
 const intervals = require('./store/intervals');
 
 const { log } = console;
-const isEnglish = true;
+let isEnglish;
 
 (() => {
   word = word.toLowerCase();
@@ -23,9 +23,11 @@ const isEnglish = true;
   let tries = 0;
 
   const recursiveQuestion = () => {
+    // you lost
+
     if (tries === 10) {
       winLoseTimer(text.loseText(word, isEnglish), intervals.loseTextInterval);
-      runningMan();
+      runningMan(text, isEnglish);
       return rl.close();
     }
     rl.question(tries || answers.length ? text.tryAnotherLetter(isEnglish) : text.welcome(isEnglish), (input) => {
@@ -77,5 +79,20 @@ const isEnglish = true;
       }
     });
   };
-  recursiveQuestion();
+
+  const whatLanguage = () => {
+    rl.question("Do you want to play hangman in English? Type 'e'. Willst Du Galgenbaum auf Deutsch spielen? Tippe 'd'.", (input) => {
+      if (input === 'd') {
+        isEnglish = false;
+        return recursiveQuestion();
+      }
+      if (input === 'e') {
+        isEnglish = true;
+        return recursiveQuestion();
+      }
+      whatLanguage();
+    });
+  };
+
+  whatLanguage();
 })();

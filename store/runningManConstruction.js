@@ -1,6 +1,4 @@
-const { tornRope } = require('./text');
-
-function runTime() {
+function runTime(text, isEnglish) {
   setTimeout(() => {
     const runningMan = [
       '  \\O/\n   |\n  / \\',
@@ -30,7 +28,7 @@ function runTime() {
     let i = 0;
     const moving = setInterval(() => {
       console.clear();
-      console.log(tornRope);
+      console.log(text.tornRope(isEnglish));
       console.log(runningMan[i]);
       i += 1;
       if (i === runningMan.length) clearInterval(moving);

@@ -8,7 +8,7 @@ const text = {
   youTried: (isEnglish) => (isEnglish ? '\n     You tried the following input:' : '\n     Du hast schon folgendes ausprobiert:'),
   tornRope: (isEnglish) => (isEnglish ? '\n\n     Oh, the rope is torn! Thus no one will be hanged!!!' : '\n\n     Oh, der Strick ist gerissen! Somit wird niemand gehängt!!!'),
   veryGood: (answer, isEnglish) => (isEnglish ? `\n     Very good, '${answer}' is included.\n` : `\n     Sehr gut, '${answer}' steckt im Wort.\n`),
-  wrongGuess: (answer, isEnglish) => (isEnglish ? `\n     Well, too bad that '${answer}' is not included.\n` : `\n     Tja, leider steckt '${answer}' nicht im Wort.\n`),
+  wrongGuess: (answer, isEnglish) => (isEnglish ? `\n     Well, too bad. But '${answer}' is not included.\n` : `\n     Tja, leider steckt '${answer}' nicht im Wort.\n`),
 };
 
 module.exports = text;
