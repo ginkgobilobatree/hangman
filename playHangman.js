@@ -81,7 +81,7 @@ let isEnglish;
   };
 
   const whatLanguage = () => {
-    rl.question("Do you want to play hangman in English? Type 'e'. Willst Du Galgenbaum auf Deutsch spielen? Tippe 'd'.", (input) => {
+    rl.question(text.pickLanguage, (input) => {
       if (input === 'd') {
         isEnglish = false;
         return recursiveQuestion();

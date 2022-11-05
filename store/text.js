@@ -9,6 +9,7 @@ const text = {
   tornRope: (isEnglish) => (isEnglish ? '\n\n     Oh, the rope is torn! Thus no one will be hanged!!!' : '\n\n     Oh, der Strick ist gerissen! Somit wird niemand gehängt!!!'),
   veryGood: (answer, isEnglish) => (isEnglish ? `\n     Very good, '${answer}' is included.\n` : `\n     Sehr gut, '${answer}' steckt im Wort.\n`),
   wrongGuess: (answer, isEnglish) => (isEnglish ? `\n     Well, too bad. But '${answer}' is not included.\n` : `\n     Tja, leider steckt '${answer}' nicht im Wort.\n`),
+  pickLanguage: "Do you want to play hangman in English? Type 'e'. Willst Du Galgenbaum auf Deutsch spielen? Tippe 'd'.",
 };
 
 module.exports = text;
